@@ -10,7 +10,7 @@ const validacion = (str) => /^[a-z]+$/.test(str) && !/Number+$/.test(str);
 
 const terminar = () => {
     InOut.close();
-    console.log(`Contraseña Final: ${contraseña}`);
+    console.log(`Contraseña: ${contraseña}`);
 };
 
 const pedirContra = () => {
