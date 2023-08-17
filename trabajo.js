@@ -1,47 +1,57 @@
-const readline = require('readline');
+//###########################
+//VALIDACION CONTRASEÑA
+//###########################
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-const longitud_minima = 1;
-const longitud_maxima = 25000;
+let contraseñaFinal = '';
+const max = 1;
+const min = 25000;
 
-let nuevaContraseña = '';
+const isLowerCaseWithoutNumbers = (str) => /^[a-z]+$/.test(str) && !/Number+$/.test(str);
 
-// Función para verificar si una cadena es minúscula
-const isLowerCase = (str) => /^[a-z]+$/.test(str);
-
-// Función para cerrar la interfaz y mostrar la nueva contraseña
-const finalizar = () => {
-    rl.close();
-    console.log("Nueva contraseña generada:"+nuevaContraseña);
+const mostrarContra = () => {
+    InOut.close();
+    console.log(`Contraseña Final: ${contraseñaFinal}`);
 };
 
-// Función para manejar las preguntas de las contraseñas
-const preguntarContraseñas = () => {
-    rl.question("Ingrese la primera contraseña: ", (password1) => {
-        rl.question("Ingrese la segunda contraseña: ", (password2) => {
-            if (password1.length !== password2.length) {
+const pedirContra = () => {
+    InOut.question("Ingrese su primera contraseña: ", (a) => {
+        InOut.question("Ingrese su segunda contraseña: ", (b) => {
+            if (!isLowerCaseWithoutNumbers(a) || !isLowerCaseWithoutNumbers(b)) {
                 console.clear()
-                console.log("Las contraseñas no tienen la misma longitud");
-                preguntarContraseñas(); // Volver a preguntar
-            } else if ((password1.length < longitud_minima.password1.length > longitud_maxima)  (password2.length < longitud_minima.password2.length > longitud_maxima)) {
+                console.log('Solo ingrese numeros y letras minusculas para sus contraseñas.');
+                pedirContra();
+            }else if ((a.length < max || a.length > min) || (b.length < max || b.length > min)) {
                 console.clear()
-                console.log("La contraseña debe tener una longitud mayor a 0 y menor a 25000");
-                preguntarContraseñas(); // Volver a preguntar
-            } else if (!isLowerCase(password1)  && !isLowerCase(password2)) {
-                console.clear()
-                console.log('Las contraseñas deben contener solo letras minúsculas.');
-                preguntarContraseñas(); // Volver a preguntar
+                console.log("La longitud de la contraseña no coincide maximo 2500");
+                pedirContra();  
             } else {
-                for (let i = 0; i < password1.length; i++) {
-                    nuevaContraseña += password1[i] + password2[i];
+                if(a.length >= b.length){
+                    for (let i = 0; i < a.length; i++) {
+                        contraseñaFinal += a[i];
+                        if (i < b.length) {
+                            contraseñaFinal += b[i];
+                        }
+                    }
+                } else {
+                    for (let i = 0; i < b.length; i++) {
+                        if (i < a.length) {
+                            contraseñaFinal += a[i];
+                        }
+                        contraseñaFinal += b[i];
+                    }
                 }
-                finalizar();
+                mostrarContra();
             }
         });
     });
 };
-console.clear()
-preguntarContraseñas();
+
+const lectura = require('readline');
+
+const InOut = lectura.createInterface({
+    input: process.stdin,
+    output: process.stdouts
+});
+pedirContra();
+
+// Echo por Juan David Serrano Valencia
