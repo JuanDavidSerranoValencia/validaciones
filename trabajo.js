@@ -2,7 +2,7 @@
 //VALIDACION CONTRASEÑA
 //###########################
 
-let contraseñaFinal = '';
+let contraseña = '';
 const max = 1;
 const min = 25000;
 
@@ -10,7 +10,7 @@ const isLowerCaseWithoutNumbers = (str) => /^[a-z]+$/.test(str) && !/Number+$/.t
 
 const mostrarContra = () => {
     InOut.close();
-    console.log(`Contraseña Final: ${contraseñaFinal}`);
+    console.log(`Contraseña Final: ${contraseña}`);
 };
 
 const pedirContra = () => {
@@ -27,17 +27,17 @@ const pedirContra = () => {
             } else {
                 if(a.length >= b.length){
                     for (let i = 0; i < a.length; i++) {
-                        contraseñaFinal += a[i];
+                        contraseña += a[i];
                         if (i < b.length) {
-                            contraseñaFinal += b[i];
+                            contraseña += b[i];
                         }
                     }
                 } else {
                     for (let i = 0; i < b.length; i++) {
                         if (i < a.length) {
-                            contraseñaFinal += a[i];
+                            contraseña += a[i];
                         }
-                        contraseñaFinal += b[i];
+                        contraseña += b[i];
                     }
                 }
                 mostrarContra();
@@ -53,5 +53,3 @@ const InOut = lectura.createInterface({
     output: process.stdouts
 });
 pedirContra();
-
-// Echo por Juan David Serrano Valencia
